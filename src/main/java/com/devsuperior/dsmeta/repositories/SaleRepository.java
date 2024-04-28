@@ -10,11 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.devsuperior.dsmeta.dto.SummaryDTO;
 import com.devsuperior.dsmeta.entities.Sale;
 
-public interface SaleRepository extends JpaRepository<Sale, Long> {
-	
-	@Query("SELECT obj FROM Sale obj " +
-		   "WHERE obj.date BETWEEN :minDate AND :maxDate")
-	Page<Sale> searchTeste(LocalDate minDate, LocalDate maxDate, Pageable pageable);
+public interface SaleRepository extends JpaRepository<Sale, Long> {		
 	
 	@Query("SELECT new com.devsuperior.dsmeta.dto.SummaryDTO( sl.name, SUM(s.amount) ) FROM Sale s " +
 		   "JOIN s.seller sl " +
