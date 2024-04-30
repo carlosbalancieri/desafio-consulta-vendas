@@ -24,6 +24,6 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
 	           "FROM Sale s " +
 			   "JOIN s.seller sl " +
 			   "WHERE s.date BETWEEN :minDate AND :maxDate " +
-			   "AND UPPER(sl.name) LIKE UPPER(CONCAT('%', :name, '%'))") 
+			"AND (:name IS NULL OR UPPER(sl.name) LIKE UPPER(CONCAT('%', :name, '%')))") 
 		Page<ReportDTO> getReport(LocalDate minDate, LocalDate maxDate, String name, Pageable pageable);	
 }
